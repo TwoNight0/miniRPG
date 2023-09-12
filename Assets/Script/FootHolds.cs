@@ -30,6 +30,13 @@ public class FootHolds : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 해상도를 픽셀로 고정시키는
+        Screen.SetResolution(1920, 1080, true);
+
+        // 해상도를 비율로 고정시키는
+        
+
+
         footholdInit();
     }
 
