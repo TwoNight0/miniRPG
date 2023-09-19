@@ -20,8 +20,8 @@ public class FootHolds : MonoBehaviour
 
     //Á¶Á¤
     [Header("Gap")]
-    public float rowGap = 0.75f;
-    public float colGap = 0.72f;
+    public float rowGap = 0.5f;
+    public float colGap = 0.5f;
 
     private Vector3 firstFootholdpos;
 
@@ -46,7 +46,7 @@ public class FootHolds : MonoBehaviour
 
         foothold_parent = GameObject.Find("FootHolds");
 
-        firstFootholdpos = new Vector3(-4.15f, 0, 2.5f);
+        firstFootholdpos = new Vector3(-3.15f, 0, 2.5f);
 
         int totalFoothold = row * col;
         for (int i = 0; i < totalFoothold; i++)
