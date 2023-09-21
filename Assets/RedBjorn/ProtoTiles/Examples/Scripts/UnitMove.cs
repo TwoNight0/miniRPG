@@ -131,6 +131,9 @@ namespace RedBjorn.ProtoTiles.Example
             }
         }
 
+        /// <summary>
+        /// 패스를 그려주는 함수
+        /// </summary>
         void PathUpdate()
         {
             if (Path && Path.IsEnabled)

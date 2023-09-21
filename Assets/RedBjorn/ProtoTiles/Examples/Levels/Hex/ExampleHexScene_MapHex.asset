@@ -34,7 +34,7 @@ MonoBehaviour:
     Id: 98efd35f51fc1da41a2b0801384a5213
     MapColor: {r: 0, g: 1, b: 0.90932775, a: 0.5019608}
     Prefab: {fileID: 1253730174499678, guid: b3ca21c1a649c954f9c7571558826bd5, type: 3}
-    GridOffset: -0.39
+    GridOffset: -0.3
     Tags:
     - {fileID: 11400000, guid: 25b8c40cae2c9684985e9ebdc6331b8e, type: 2}
   - Type: SkyscraperSingle

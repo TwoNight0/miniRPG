@@ -27,6 +27,8 @@ namespace RedBjorn.ProtoTiles.Example
                 {
                     LastFrame.OverObject = null;
                 }
+
+                //화면 중앙선
                 var screemCenterRay = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
                 float enter = 0f;
                 if (plane.Raycast(screemCenterRay, out enter))
