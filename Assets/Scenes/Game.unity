@@ -11220,7 +11220,6 @@ RectTransform:
   - {fileID: 1525773403}
   - {fileID: 711349261}
   - {fileID: 1717394199}
-  - {fileID: 1891762386}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -12608,8 +12607,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainImage: {fileID: 1293042976}
-  subtitles: {fileID: 221189837}
-  dialogue: {fileID: 1294912007}
+  objSubtitles: {fileID: 221189837}
+  objDialogue: {fileID: 1294912007}
+  objDate: {fileID: 1891762385}
+  objSelections: {fileID: 1151357695}
 --- !u!1001 &1143403782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14450,8 +14451,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00012207, y: -244.33899}
-  m_SizeDelta: {x: 1351.8, y: 66.711}
+  m_AnchoredPosition: {x: 0.00012207, y: -345}
+  m_SizeDelta: {x: 1351.8, y: 248.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1294912009
 MonoBehaviour:
@@ -14536,7 +14537,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 41.70984, y: 0, z: 0, w: 0}
+  m_margin: {x: 9.94751, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -17188,6 +17189,7 @@ RectTransform:
   - {fileID: 221189838}
   - {fileID: 1151357696}
   - {fileID: 1294912008}
+  - {fileID: 1891762386}
   m_Father: {fileID: 1017310952}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -21244,12 +21246,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891762385}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1017310952}
+  m_Father: {fileID: 1525773403}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

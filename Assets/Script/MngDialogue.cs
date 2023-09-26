@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Text;
 
 public enum Dialogues {
 
@@ -32,6 +33,7 @@ public enum Dialogues {
     Slave_dealer,
     //흡혈귀의 저주
     Vampire_curse,
+
 }
 
 
@@ -39,12 +41,34 @@ public enum Dialogues {
 public class MngDialogue : MonoBehaviour
 {
     [SerializeField] private Image MainImage;
-    [SerializeField] private GameObject subtitles;
-    [SerializeField] private GameObject dialogue;
+    //자막
+    [SerializeField] private GameObject objSubtitles;
+    //설명
+    [SerializeField] private GameObject objDialogue;
+    //일차
+    [SerializeField] private GameObject objDate;
+    //선택창
+    [SerializeField] private GameObject objSelections;
 
+
+    //여행가능한 총 이벤트 
     private List<int> Dialogues_list;
+    //실질적인 여행리스트
     private List<int> Journey_list;
+
+    //버튼 선택지(content에 추가예정)
     private List<Button> selections;
+
+
+    #region TextMeshPro
+    //자막바꾸기용
+    TextMeshProUGUI textSub;
+    //대사바꾸기용
+    TextMeshProUGUI textDial;
+    //일차 바꾸기용
+    TextMeshProUGUI textDate;
+    #endregion
+
 
     //현재 어떠한 장면인지
     private Dialogues nowDialogue;
@@ -56,13 +80,22 @@ public class MngDialogue : MonoBehaviour
         Journey_list = new List<int>();
 
 
-        TextMeshProUGUI subText = subtitles.GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI dialText = dialogue.GetComponent<TextMeshProUGUI>();
+        textSub = objSubtitles.GetComponent<TextMeshProUGUI>();
+        textDial = objDialogue.GetComponent<TextMeshProUGUI>();
+        textDate = objDialogue.GetComponent<TextMeshProUGUI>();
         
         //dialText.text = "너 태어남";
 
         initDialogueList();
         makeJourney();
+
+        nowDialogue = Dialogues.Start_Dialogue;
+
+    }
+
+    private void Update()
+    {
+        dialogueChange(nowDialogue);
     }
 
     /// <summary>
@@ -86,11 +119,69 @@ public class MngDialogue : MonoBehaviour
 
 
     /// <summary>
-    /// 조건에 맞게 대화를 버튼을 추가하거나 수정
+    /// 조건에 맞게 대화를 버튼을 추가하거나 수정 , 매개변수에 nowDialogue를 넣어 사용
     /// </summary>
-    public void dialogueChange()
+    public void dialogueChange(Dialogues _Dialogue)
     {
+        switch (_Dialogue)
+        {
+            case Dialogues.Start_Dialogue:
+                //이미지
+                MainImage.sprite = Resources.Load<Sprite>("DialogueImg/Start_Dialogue");
 
+                //자막
+                objSubtitles.SetActive(false);
+
+                //선택지
+                objSelections.SetActive(false);
+
+                string temp = textDial.text;
+
+                //설명
+                StringBuilder sb = new StringBuilder();
+                sb.Append("당신은 낯선 장소에서 눈을 뜹니다, 당신의 종족은");
+                sb.Append(UnitStat.instance.racial);
+           
+                StartCoroutine(turnOverPage(3.0f, sb));
+
+
+                sb.Append("가장 높은 능력치는, ");
+                StartCoroutine(turnOverPage(3.0f, sb));
+                
+
+
+                break;
+            case Dialogues.Slave_dealer:
+
+                break;
+            case Dialogues.Excalibur:
+
+                break;
+            case Dialogues.Boss:
+
+                break;
+            case Dialogues.Encounter_wizard:
+
+                break;
+            case Dialogues.Encounter_pirate:
+
+                break;
+            case Dialogues.Deal_with_Devil:
+
+                break;
+            case Dialogues.Village:
+
+                break;
+            case Dialogues.Temple_antique:
+
+                break;
+            case Dialogues.Robber:
+
+                break;
+            case Dialogues.Vampire_curse:
+
+                break;
+        }           
     }
 
 
@@ -159,5 +250,15 @@ public class MngDialogue : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 몇 초 후에 문장을 넘기는 함수
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator turnOverPage(float _second, StringBuilder _stringBuilder)
+    {
+        textDial.text = _stringBuilder.ToString();
+        yield return new WaitForSeconds(_second);
+        _stringBuilder.Clear();
 
+    }
 }

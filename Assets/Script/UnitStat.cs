@@ -23,16 +23,19 @@ public class UnitStat : characterData
         {
             Destroy(this);
         }
-        
+
+        InitStat();
     }
 
     [SerializeField] private int InitStatPoint = 5;
+
+    public new Racial racial;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        InitStat();
+        
     }
 
     // Update is called once per frame
@@ -40,8 +43,6 @@ public class UnitStat : characterData
     {
 
     }
-
-
 
     public override void Attack()
     {
@@ -104,7 +105,7 @@ public class UnitStat : characterData
 
         //종족 선택
         int len = System.Enum.GetValues(typeof(Racial)).Length;
-        int racial = UnityEngine.Random.Range(0, len);
+        int IntRacial = UnityEngine.Random.Range(0, len);
         // 근건 건강 민첩 지능 명중
 
         //오크 : 근력 + 4, 건강 + 3, 민첩 -1, 지능 - 2 -> +4
@@ -114,7 +115,7 @@ public class UnitStat : characterData
         //수인 : 민첩 + 4, 명중 +1, 지능 -1 -> +4
 
         //종족에 해당되는 스택 수정 
-        switch (racial)
+        switch (IntRacial)
         {
             case 0:
                 //오크
@@ -122,12 +123,17 @@ public class UnitStat : characterData
                 Fitness += 3;
                 Intelligence -= 2;
                 Nimble -= 1;
+
+                //종족
+                racial = Racial.Orc;
                 break;
             case 1:
                 //엘프
                 Intelligence += 4;
                 Nimble += 1;
                 Fitness -=1;
+
+                racial = Racial.Orc;
                 break;
             case 2:
                 //인간
@@ -135,6 +141,8 @@ public class UnitStat : characterData
                 Nimble += 1;
                 Intelligence += 1;
                 Accuracy += 1;
+
+                racial = Racial.Human;
                 break;
             case 3:
                 //드워프
@@ -142,15 +150,19 @@ public class UnitStat : characterData
                 Intelligence += 1;
                 Fitness += 3;
                 Nimble -= 2;
+
+                racial = Racial.Dwarf;
                 break;
             case 4:
                 Nimble += 4;
                 Intelligence -= 1;
                 Accuracy +=1;
+
+                racial = Racial.Mammon;
                 break;
         }
 
-        Debug.Log("종족 : " + (Racial)racial);
+        Debug.Log("종족 : " + (Racial)IntRacial);
 
         Debug.Log("근력 : " + Strength);
         Debug.Log("건강 : " + Fitness);
