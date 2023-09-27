@@ -59,6 +59,9 @@ public class MngDialogue : MonoBehaviour
     //버튼 선택지(content에 추가예정)
     private List<Button> selections;
 
+    private bool stopPage = false;
+
+    [Tooltip("넘기는 시간")] public float TimeTurn = 2.0f;
 
     #region TextMeshPro
     //자막바꾸기용
@@ -123,65 +126,64 @@ public class MngDialogue : MonoBehaviour
     /// </summary>
     public void dialogueChange(Dialogues _Dialogue)
     {
-        switch (_Dialogue)
+        if (!stopPage)
         {
-            case Dialogues.Start_Dialogue:
-                //이미지
-                MainImage.sprite = Resources.Load<Sprite>("DialogueImg/Start_Dialogue");
+            switch (_Dialogue)
+            {
+                case Dialogues.Start_Dialogue:
+                    //일단 페이지 멈춰
+                    stopPage = true;
 
-                //자막
-                objSubtitles.SetActive(false);
+                    //이미지
+                    MainImage.sprite = Resources.Load<Sprite>("DialogueImg/Start_Dialogue");
 
-                //선택지
-                objSelections.SetActive(false);
+                    //자막
+                    objSubtitles.SetActive(false);
 
-                string temp = textDial.text;
+                    //선택지
+                    objSelections.SetActive(false);
 
-                //설명
-                StringBuilder sb = new StringBuilder();
-                sb.Append("당신은 낯선 장소에서 눈을 뜹니다, 당신의 종족은");
-                sb.Append(UnitStat.instance.racial);
-           
-                StartCoroutine(turnOverPage(3.0f, sb));
+                    //설명
+                    DialogueScript_Start dial_start = new DialogueScript_Start();
 
+                    dial_start.printDialogue();
 
-                sb.Append("가장 높은 능력치는, ");
-                StartCoroutine(turnOverPage(3.0f, sb));
-                
+                    StartCoroutine(dial_start.turnOverPage(TimeTurn, textDial));
+                    StopCoroutine(dial_start.turnOverPage(TimeTurn, textDial));
 
+                    break;
+                case Dialogues.Slave_dealer:
 
-                break;
-            case Dialogues.Slave_dealer:
+                    break;
+                case Dialogues.Excalibur:
 
-                break;
-            case Dialogues.Excalibur:
+                    break;
+                case Dialogues.Boss:
 
-                break;
-            case Dialogues.Boss:
+                    break;
+                case Dialogues.Encounter_wizard:
 
-                break;
-            case Dialogues.Encounter_wizard:
+                    break;
+                case Dialogues.Encounter_pirate:
 
-                break;
-            case Dialogues.Encounter_pirate:
+                    break;
+                case Dialogues.Deal_with_Devil:
 
-                break;
-            case Dialogues.Deal_with_Devil:
+                    break;
+                case Dialogues.Village:
 
-                break;
-            case Dialogues.Village:
+                    break;
+                case Dialogues.Temple_antique:
 
-                break;
-            case Dialogues.Temple_antique:
+                    break;
+                case Dialogues.Robber:
 
-                break;
-            case Dialogues.Robber:
+                    break;
+                case Dialogues.Vampire_curse:
 
-                break;
-            case Dialogues.Vampire_curse:
-
-                break;
-        }           
+                    break;
+            }           
+        }
     }
 
 
