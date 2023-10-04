@@ -18,11 +18,5 @@ public class InventoryScript
 
     //load
 
-    //stat indicate
-    public void StatIndicate()
-    {
-        
-
-
-    }
+    
 }

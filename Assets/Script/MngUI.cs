@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using Unity.VisualScripting;
 
 public class MngUI : MonoBehaviour
 {
@@ -12,9 +14,9 @@ public class MngUI : MonoBehaviour
     #endregion
 
     //test
-    public GameObject inventory;
-    public GameObject stat;
-
+    [SerializeField] private GameObject Panel_Inventory;
+    [SerializeField] private GameObject PanelStat;
+    [SerializeField] private GameObject PanelChactor;
 
     #region Button
     private Button BtnSetting;
@@ -31,13 +33,28 @@ public class MngUI : MonoBehaviour
     private Button BtnCrew_3;
     #endregion
 
+    #region Text
+    private TextMeshProUGUI UnitData_Racial;
+    private TextMeshProUGUI UnitData_Strength;
+    private TextMeshProUGUI UnitData_Fitness;
+    private TextMeshProUGUI UnitData_Nimble;
+    private TextMeshProUGUI UnitData_Intelligence;
+    private TextMeshProUGUI UnitData_Accuracy;
+
+    #endregion
 
 
+   
+
+    private void Awake()
+    {
+        initUI();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        initUI();
+        PanelStat.SetActive(false);
 
     }
 
@@ -70,15 +87,29 @@ public class MngUI : MonoBehaviour
         BtnStat = GameObject.Find("BtnStat").GetComponent<Button>();
         BtnStat.onClick.AddListener(() => {
             //캐릭터창 끄고
-
+            PanelChactor.SetActive(!PanelChactor.activeSelf);
 
             //스탯창 켜고
-            stat.SetActive(!stat.activeSelf);
+            PanelStat.SetActive(!PanelStat.activeSelf);
 
             //스크립트에서 함수를 가져와서 텍스트 할당해주고
 
+
         });
         #endregion
+
+        //꺼져있어서 못찾네..?
+        #region Text 할당
+        UnitData_Racial = GameObject.Find("UnitData_Racial").GetComponent<TextMeshProUGUI>();
+        UnitData_Strength = GameObject.Find("UnitData_Strength").GetComponent<TextMeshProUGUI>();
+        UnitData_Fitness = GameObject.Find("UnitData_Fitness").GetComponent<TextMeshProUGUI>();
+        UnitData_Nimble = GameObject.Find("UnitData_Nimble").GetComponent<TextMeshProUGUI>();
+        UnitData_Intelligence = GameObject.Find("UnitData_Intelligence").GetComponent<TextMeshProUGUI>();
+        UnitData_Accuracy = GameObject.Find("UnitData_Accuracy").GetComponent<TextMeshProUGUI>();
+
+        Debug.Log(UnitData_Racial);
+        #endregion
+
     }
 
     // Update is called once per frame
@@ -87,5 +118,13 @@ public class MngUI : MonoBehaviour
         
     }
 
-    
+
+    //stat indicate
+    public void StatIndicate()
+    {
+        UnitData_Racial.text = UnitStat.instance.m_racial.ToString();
+
+
+    }
+
 }
