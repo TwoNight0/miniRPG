@@ -29,7 +29,7 @@ public class UnitStat : characterData
 
     [SerializeField] private int InitStatPoint = 5;
 
-    public new Racial racial;
+    public Racial m_racial;
 
 
     // Start is called before the first frame update
@@ -125,7 +125,7 @@ public class UnitStat : characterData
                 Nimble -= 1;
 
                 //종족
-                racial = Racial.Orc;
+                m_racial = Racial.Orc;
                 break;
             case 1:
                 //엘프
@@ -133,7 +133,7 @@ public class UnitStat : characterData
                 Nimble += 1;
                 Fitness -=1;
 
-                racial = Racial.Orc;
+                m_racial = Racial.Orc;
                 break;
             case 2:
                 //인간
@@ -142,7 +142,7 @@ public class UnitStat : characterData
                 Intelligence += 1;
                 Accuracy += 1;
 
-                racial = Racial.Human;
+                m_racial = Racial.Human;
                 break;
             case 3:
                 //드워프
@@ -151,14 +151,14 @@ public class UnitStat : characterData
                 Fitness += 3;
                 Nimble -= 2;
 
-                racial = Racial.Dwarf;
+                m_racial = Racial.Dwarf;
                 break;
             case 4:
                 Nimble += 4;
                 Intelligence -= 1;
                 Accuracy +=1;
 
-                racial = Racial.Mammon;
+                m_racial = Racial.Mammon;
                 break;
         }
 

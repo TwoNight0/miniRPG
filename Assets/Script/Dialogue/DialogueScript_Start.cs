@@ -10,9 +10,9 @@ public class DialogueScript_Start : DialogueScript
 
         StringBuilder sb = new StringBuilder();
         sb.Append("당신은 낯선 장소에서 눈을 뜹니다, 당신의 종족은 [");
-        sb.Append(UnitStat.instance.racial);
+        sb.Append(UnitStat.instance.m_racial);
         sb.Append("] 이며 가장 강한 스탯은 [");
-        sb.Append(UnitStat.instance.racial);
+        sb.Append(UnitStat.instance.m_racial);
         sb.Append("] 입니다");
         this.ListDialogue.Add(sb.ToString());
 
