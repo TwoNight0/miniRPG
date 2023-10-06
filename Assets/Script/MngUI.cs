@@ -7,17 +7,26 @@ using Unity.VisualScripting;
 
 public class MngUI : MonoBehaviour
 {
+    public static MngUI instance;
 
     #region Script
 
 
     #endregion
 
-    //test
+    #region GameObject
+    //팝업패널로 묶은다음 아래것들은 팝업패널에서 찾도록만들 것
+    [SerializeField] private GameObject PanelPopup;
     [SerializeField] private GameObject Panel_Inventory;
     [SerializeField] private GameObject PanelStat;
     [SerializeField] private GameObject PanelChactor;
 
+    [SerializeField] public GameObject PanelLeft;
+    [SerializeField] public GameObject PanelRight;
+
+
+
+    #endregion
     #region Button
     private Button BtnSetting;
     private Button BtnInventory;
@@ -56,6 +65,9 @@ public class MngUI : MonoBehaviour
     {
         PanelStat.SetActive(false);
 
+        PanelLeft.SetActive(false);
+        PanelRight.SetActive(false);
+        PanelPopup.SetActive(false);
     }
 
     /// <summary>
@@ -63,6 +75,17 @@ public class MngUI : MonoBehaviour
     /// </summary>
     private void initUI()
     {
+        //singleton
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
+
         //해상도 조정
         float targetRatio = 16.0f / 9.0f;
         float ratio = (float)Screen.width / (float)Screen.height;

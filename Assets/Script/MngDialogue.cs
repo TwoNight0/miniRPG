@@ -4,6 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Text;
+using UnityEditor.SceneManagement;
+using DG.Tweening;
+
+
+public enum Condition
+{
+    //전투중
+    Battle,
+    //대화중
+    Conversation
+}
+
 
 public enum Dialogues {
 
@@ -35,7 +47,6 @@ public enum Dialogues {
     Vampire_curse,
 
 }
-
 
 
 public class MngDialogue : MonoBehaviour
@@ -72,6 +83,7 @@ public class MngDialogue : MonoBehaviour
     TextMeshProUGUI textDate;
     #endregion
 
+    private int nowDate = 0;
 
     //현재 어떠한 장면인지
     private Dialogues nowDialogue;
@@ -85,14 +97,22 @@ public class MngDialogue : MonoBehaviour
 
         textSub = objSubtitles.GetComponent<TextMeshProUGUI>();
         textDial = objDialogue.GetComponent<TextMeshProUGUI>();
-        textDate = objDialogue.GetComponent<TextMeshProUGUI>();
+        textDate = objDate.GetComponent<TextMeshProUGUI>();
         
         //dialText.text = "너 태어남";
 
         initDialogueList();
+
+        //여행일정을 짜기
         makeJourney();
 
+        //현재 모험상태 설정
         nowDialogue = Dialogues.Start_Dialogue;
+
+        PrintJourney();
+
+        StartCoroutine(printDate());
+
 
     }
 
@@ -223,7 +243,7 @@ public class MngDialogue : MonoBehaviour
          10일차 : 보스전투
          */
 
-        //생성알리미
+        //Start
         Journey_list.Add(0);
 
         //큰리스트를 복사한 후 여기서 실행하는 동안 뺄거임
@@ -245,11 +265,16 @@ public class MngDialogue : MonoBehaviour
             copylist.RemoveAt(RandomNum);
         }
 
-        //for(int i = 0; i < Journey_list.Count; i++)
-        //{
-        //    Debug.Log(i + 1 + "번째 : " + Journey_list[i]);
-        //}
+        //Boss
+        Journey_list.Add(1);
+    }
 
+    public void PrintJourney()
+    {
+        for (int i = 0; i < Journey_list.Count; i++)
+        {
+            Debug.Log(i + 1 + "번째 : " + Journey_list[i]);
+        }
     }
 
     /// <summary>
@@ -263,4 +288,74 @@ public class MngDialogue : MonoBehaviour
         _stringBuilder.Clear();
 
     }
+
+    /// <summary>
+    /// 날짜를 표기하는 함수
+    /// </summary>
+    IEnumerator printDate()
+    {
+        //왼쪽오른쪽 끄기
+        MngUI.instance.PanelLeft.SetActive(false);
+        MngUI.instance.PanelRight.SetActive(false);
+
+        //메인이미지 off
+        MainImage.gameObject.SetActive(false);
+
+        //대사 off
+        objDialogue.gameObject.SetActive(false);
+
+        //선택지 off
+        objSelections.gameObject.SetActive(false);
+
+        //위치 기억 및 위치변경
+        Vector3 tmpPos = objDate.transform.position;
+        objDate.transform.DOMove(new Vector3(Screen.width / 2, Screen.height / 2), 0.8f, false);
+
+        //크기 키우고
+        objDate.transform.DOScale(3.0f, 1f);
+
+        yield return null;
+
+        //날짜변경해주고
+        nowDate++;
+        textDate.text = nowDate.ToString() + "DAY";
+
+        //져니에서 이름가져와 보여주기
+        nowDialogue = (Dialogues)Journey_list[nowDate-1];
+
+        yield return new WaitForSeconds(0.8f);
+        objDate.transform.DOShakePosition(1.0f, 14.0f, 10);
+
+
+        textDate.text = nowDialogue.ToString();
+
+        yield return new WaitForSeconds(2.0f);
+
+        //다시 날짜로바꾸고 빠르게 제자리고
+        textDate.text = nowDate.ToString() + "DAY";
+        yield return null;
+        objDate.transform.DOScale(1.0f, 1f);
+        objDate.transform.DOMove(tmpPos, 0.3f, false);
+
+        yield return new WaitForSeconds(0.5f);
+
+        //메인이미지 off
+        MainImage.gameObject.SetActive(true);
+
+        //대사 off
+        objDialogue.gameObject.SetActive(true);
+
+        //선택지 off
+        objSelections.gameObject.SetActive(true);
+
+        //왼쪽오른쪽 켜주기
+        MngUI.instance.PanelLeft.SetActive(true);
+        MngUI.instance.PanelRight.SetActive(true);
+
+
+        yield return null;
+
+    }
+
+
 }
