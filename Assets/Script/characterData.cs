@@ -128,6 +128,30 @@ public abstract class characterData : MonoBehaviour
     public abstract void Skill_B();
     public abstract void Skill_C();
 
-  
+    public int PubStrength
+    {
+        get => Strength;
+        set => Strength = value;
+    }
 
+    public int PubFitness
+    {
+        get => Fitness;
+        set => Fitness = value;
+    }
+    public int PubNimble
+    {
+        get => Nimble;
+        set => Nimble = value;
+    }
+    public int PubIntelligence
+    {
+        get => Intelligence;
+        set => Intelligence = value;
+    }
+    public int PubAccuracy
+    {
+        get => Accuracy;
+        set => Accuracy = value;
+    }
 }

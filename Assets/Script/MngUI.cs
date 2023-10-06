@@ -93,7 +93,7 @@ public class MngUI : MonoBehaviour
             PanelStat.SetActive(!PanelStat.activeSelf);
 
             //스크립트에서 함수를 가져와서 텍스트 할당해주고
-
+            StatIndicate();
 
         });
         #endregion
@@ -107,7 +107,7 @@ public class MngUI : MonoBehaviour
         UnitData_Intelligence = GameObject.Find("UnitData_Intelligence").GetComponent<TextMeshProUGUI>();
         UnitData_Accuracy = GameObject.Find("UnitData_Accuracy").GetComponent<TextMeshProUGUI>();
 
-        Debug.Log(UnitData_Racial);
+        //Debug.Log(UnitData_Racial);
         #endregion
 
     }
@@ -122,8 +122,12 @@ public class MngUI : MonoBehaviour
     //stat indicate
     public void StatIndicate()
     {
-        UnitData_Racial.text = UnitStat.instance.m_racial.ToString();
-
+        UnitData_Racial.text = "종족: " + UnitStat.instance.m_racial.ToString();
+        UnitData_Strength.text = "근력 : " + UnitStat.instance.PubStrength.ToString();
+        UnitData_Fitness.text = "건강 : " + UnitStat.instance.PubFitness.ToString();
+        UnitData_Nimble.text = "민첩 : " + UnitStat.instance.PubNimble.ToString();
+        UnitData_Intelligence.text = "지능 : " + UnitStat.instance.PubIntelligence.ToString();
+        UnitData_Accuracy.text = "명중 : " + UnitStat.instance.PubAccuracy.ToString();
 
     }
 
